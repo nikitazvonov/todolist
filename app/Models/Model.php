@@ -21,4 +21,20 @@ class Model
         $pdo = null;
         $statement = null;
     }
+
+    public function getTodos(PDO $pdo) {
+        $sql = "SELECT * FROM posts";
+        $statement = $pdo->query($sql);
+        return $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function deleteTodo(PDO $pdo, $id) {
+        $sql = "DELETE FROM posts WHERE id = :id";
+        $statement = $pdo->prepare($sql);
+        $statement->bindParam('id', $id);
+        $statement->execute();
+
+        $pdo = null;
+        $statement = null;
+    }
 }

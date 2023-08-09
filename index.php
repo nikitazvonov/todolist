@@ -1,3 +1,10 @@
+<?php
+require_once('app/Session.php');
+require_once('app/Controllers/ToDoController.php');
+require_once('app/Models/Model.php');
+require_once('app/DBConnection.php');
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,3 +26,20 @@
     </section>
 </body>
 </html>
+
+<?php
+
+require_once('app/Controllers/ToDoController.php');
+require_once('app/Models/Model.php');
+require_once('app/DBConnection.php');
+
+$controller = new ToDoController();
+$db = new DBConnection('localhost', 'todolist', 'root', '386342');
+
+$posts = $controller->showPosts($db->connect());
+
+foreach (array_reverse($posts) as $post) {
+    echo "<br>";
+    echo "<div>" . $post['content'] . "<br>" . "<a href=\"deleteTodo.php?deleteid=" . $post['id'] . "\">Удалить</a>" . "</div>";
+}
+?>

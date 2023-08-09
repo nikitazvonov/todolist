@@ -25,4 +25,14 @@ class ToDoController
         $model = new Model();
         $model->insertData($pdo, $content);
     }
+
+    public function showPosts(PDO $pdo) {
+        $model = new Model();
+        return $model->getTodos($pdo);
+    }
+
+    public function deletePost(PDO $pdo, $id) {
+        $model = new Model();
+        $model->deleteTodo($pdo, $id);
+    }
 }
